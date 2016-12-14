@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	margin: 0;
+	padding: 0;
+	background-image: url(../../assets/body_bckg.png);
+}
+.Holder {
+	width: auto;
+	height: auto;
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 21px;
+	margin-bottom: 21px;
+	overflow: hidden;
+	background-image: url(../../assets/header.png);
+	border-bottom-width: thick;
+	border-color: #0CF;
+}
+.Header {
+	height: 100px;
+	background-image: url(../../assets/logo.png);
+	background-repeat: no-repeat;
+	margin-bottom: 11px;
+	background-position: center;
+}
+.NavBar{
+	height:auto;
+	background-color:rgb(13, 13, 13);	
+}
+.Content{
+	height:auto;
+	margin:0 auto;
+	overflow:hidden;
+}
+.ContentMain{
+	height:auto;
+	margin:0 auto;
+	overflow:auto;
+	padding-bottom: 25px;
+}
+.PageHeading{
+	height:auto;
+	padding:11px;	
+}
+.ContentLeft{
+	width:280px;
+	float:left;	
+	padding-top:11px;
+	padding-left:11px;
+}
+.ContentRight{
+	width:680x;	
+	float:left;
+	padding-left:11px;	
+	overflow:hidden;
+}
+.Footer{
+	height:100px;	
+}
+.FormElement{
+	width: 350px;
+	margin:6px auto;
+	height: 40px;	
+}
+.TField{
+	width: 350px;
+	border: 1px solid #CCC;
+	padding-left:6px;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:17px;
+	height:35px;
+}
+.button{
+	width:200px;
+	height: 50px;
+	border:0px solid;
+	background-color:rgba(47,83,168,1.00);
+	color: #FFF;
+	font-size:24px;
+}
+.button:hover{
+	background-color:rgba(26,8,114,1.00);
+		color:#FFF;
+}
+h1 {
+	margin:0;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-weight:lighter;
+}
+h2{
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: lighter;
+	color: #FFF;
+}
+h6{
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: lighter;
+	font-size: 14px;
+	color: #FFF;
+}
