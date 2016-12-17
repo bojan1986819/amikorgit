@@ -97,6 +97,12 @@ Route::get('/client', [
     'middleware' => 'auth'
 ]);
 
+Route::post('/editclient', [
+    'uses' => 'ClientController@editItem',
+    'as' => 'editclient',
+    'middleware' => 'auth'
+]);
+
 Route::get('/clientsearch', [
     'uses' => 'ClientController@clientSearch',
     'as' => 'clientsearch',

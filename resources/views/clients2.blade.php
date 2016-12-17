@@ -1,4 +1,10 @@
+@extends('layouts.master')
 
+@section('title')
+    Kliensek kezelése
+@endsection
+
+@section('content')
 
     <div class="row">
         <div class="col-md-12">
@@ -61,8 +67,8 @@
                 </tr>
                 <tr>
                     <th>ID</th>
-                    <th>Vezetéknév</th>
-                    <th>Keresztnév</th>
+                    <th>Név</th>
+                    <th>Cég</th>
                     <th>Gombok</th>
                 </tr>
                 {{ csrf_field() }}
@@ -71,13 +77,13 @@
                 @foreach($clients as $client)
                     <tr class="item{{$client->id}}">
                         <td>{{$client->id}}</td>
-                        <td>{{$client->last_name}}</td>
-                        <td>{{$client->first_name}}</td>
+                        <td>{{$client->client_name}}</td>
+                        <td>{{$client->company_name}}</td>
                         <td>
-                            <button class="edit-modal btn btn-primary" data-id="{{$client->id}}" data-title="{{$client->last_name}}" data-description="{{$client->first_name}}">
+                            <button class="edit-modal btn btn-primary" data-id="{{$client->id}}" data-title="{{$client->client_name}}" data-description="{{$client->client_name}}">
                                 <span class="glyphicon glyphicon-edit"></span> Módosítás
                             </button>
-                            <button class="delete-modal btn btn-danger" data-id="{{$client->id}}" data-title="{{$client->last_name}}" data-description="{{$client->first_name}}">
+                            <button class="delete-modal btn btn-danger" data-id="{{$client->id}}" data-title="{{$client->company_name}}" data-description="{{$client->company_name}}">
                                 <span class="glyphicon glyphicon-trash"></span> Törlés
                             </button>
                         </td>
@@ -92,3 +98,4 @@
     </div>
 
     @include('modals.edit-client')
+@endsection

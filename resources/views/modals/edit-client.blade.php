@@ -7,22 +7,22 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('id') ? 'has-error' : '' }}">
                         <label class="control-label col-sm-2" for="id">ID :</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="fid" disabled>
+                            <input type="text" class="form-control" id="fid" disabled value="{{ Request::old('id') }}">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="title">Vezetéknév:</label>
+                    <div class="form-group {{ $errors->has('client_name') ? 'has-error' : '' }}">
+                        <label class="control-label col-sm-2" for="title">Név:</label>
                         <div class="col-sm-10">
-                            <input type="name" class="form-control" id="t">
+                            <input type="name" class="form-control" id="t" value="{{ Request::old('client_name') }}">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="description">Keresztnév:</label>
+                    <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
+                        <label class="control-label col-sm-2" for="description">Cég:</label>
                         <div class="col-sm-10">
-                            <input type="name" class="form-control" id="d">
+                            <input type="name" class="form-control" id="d" value="{{ Request::old('company_name') }}">
                         </div>
                     </div>
                 </form>
@@ -37,8 +37,12 @@
                     <button type="button" class="btn btn-warning" data-dismiss="modal">
                         <span class='glyphicon glyphicon-remove'></span> Close
                     </button>
+                    <input type="hidden" name="_token" value="{{ Session::token() }}">
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+session::token() }}';
+var urlEditUser = '{{ route('editclient') }}';

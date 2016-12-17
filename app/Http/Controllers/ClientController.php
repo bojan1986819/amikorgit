@@ -224,15 +224,15 @@ class ClientController extends Controller
         return view('clients2',['clients' => $clients]);*/
 
         $search = \Request::get('search');
-        $clients = Client::where('last_name','like', '%'.$search.'%')->orderBy('id')->paginate('3');
+        $clients = Client::where('client_name','like', '%'.$search.'%')->orderBy('id')->paginate('3');
         return view('clients2',['clients' => $clients]);
     }
 
     // edit data function
     public function editItem(Request $req) {
         $client = Client::find ($req->id);
-        $client->last_name = $req->last_name;
-        $client->first_name = $req->first_name;
+        $client->client_name = $req->client_name;
+        $client->company_name = $req->company_name;
         $client->save();
         return response()->json($client);
     }
@@ -240,8 +240,7 @@ class ClientController extends Controller
     // add data into database
     public function addItem(Request $req) {
         $rules = array(
-            'last_name' => 'required',
-            'first_name' => 'required'
+            'client_name' => 'required'
         );
         // for Validator
         $validator = Validator::make ( Input::all (), $rules );
@@ -250,8 +249,8 @@ class ClientController extends Controller
 
         else {
             $client = new Client();
-            $client->last_name = $req->last_name;
-            $client->first_name = $req->first_name;
+            $client->client_name = $req->client_name;
+            $client->company_name = $req->company_name;
             $client->save();
             return response()->json($client);
         }
@@ -267,15 +266,15 @@ class ClientController extends Controller
         if($request->ajax())
         {
             $output="";
-            $clients=Client::where('first_name','LIKE','%'.$request->search2.'%')
-                ->orWhere('last_name','LIKE','%'.$request->search2.'%')->get();
+            $clients=Client::where('client_name','LIKE','%'.$request->search2.'%')
+                ->orWhere('company_name','LIKE','%'.$request->search2.'%')->get();
 
             if($clients){
                 foreach ($clients as $key =>$client){
                     $output.='<tr>'.
                         '<td>'.$client->id.'</td>'.
-                        '<td>'.$client->last_name.'</td>'.
-                        '<td>'.$client->first_name.'</td>'.
+                        '<td>'.$client->client_name.'</td>'.
+                        '<td>'.$client->company_name.'</td>'.
                         '</tr>';
                 }
                 return Response($output);
