@@ -34,8 +34,8 @@
     <link href="//cdn.jsdelivr.net/tag-it/2.0/css/jquery.tagit.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/tag-it/2.0/js/tag-it.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/select2/3.5.2/select2.css">
+    <script src="//cdn.jsdelivr.net/select2/3.5.2/select2.min.js"></script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
 </head>

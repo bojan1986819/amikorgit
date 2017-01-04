@@ -22,6 +22,8 @@
 <div class="row">
     <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/fancybox/2.1.4/jquery.fancybox.css" />
     <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.4/jquery.fancybox.js"></script>
+
+
     <header><h3>Új megrendelés</h3></header>
     <hr>
 
@@ -30,7 +32,7 @@
     <style>
         /* required for add/edit dialog overlapping */
         .fancybox-overlay {
-            z-index:1001;
+            z-index:940;
         }
     </style>
 
@@ -55,18 +57,23 @@
     {{--<iframe src="sima/main.php" width="1300" height="1000"></iframe>--}}
 
     <script>
-        function show_hide_fields(o)
+        function show_hide_fields()
         {
-            if ($("#type").val() == "eladas")
+            var selector1 = 'input[name="type"].editable';
+            var selector2 = 'input[name="type"].FormElement';
+
+            if ($(selector1).val() == "eladas" || $(selector2).val() == "eladas")
             {
-                $('input[name="berbeadas_start"]').attr("disabled","disabled");
-                $('input[name="berbeadas_end"]').attr("disabled","disabled");
+                $('input[name="berbeadas_start"]').prop("disabled",true);
+                $('input[name="berbeadas_end"]').attr("disabled",true);
             }
             else
             {
                 $('input[name="berbeadas_start"]').attr("disabled",false);
                 $('input[name="berbeadas_end"]').attr("disabled",false);
             }
+//            $('input[name="berbeadas_start"]').attr("disabled","disabled");
+//            $('input[name="berbeadas_end"].FormElement').hide();
         }
 
         $(document).ready(function() {

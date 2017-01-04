@@ -130,6 +130,12 @@ Route::any('/all_products', [
 
 Route::get('/products/{id}', 'ProductController@getProduct');
 
+Route::get('/invoice/{id}', [
+    'uses' => 'InvoiceController@getInvoice',
+    'middleware' => 'auth'
+]);
+
+
 Route::get('/new_product/nameautocomplete', 'ProductController@nameAutocomplete');
 
 Route::any('/neworder', [

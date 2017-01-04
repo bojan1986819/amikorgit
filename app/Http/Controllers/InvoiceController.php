@@ -404,7 +404,7 @@ class InvoiceController extends Controller
         $cod["editable"] = true;
         $cod["editrules"] = array("required"=>true);
         $cod["edittype"] = "select";
-        $cod["editoptions"] = array("value"=>"eladás:eladás;bérbe adás:bérbe adás");
+        $cod["editoptions"] = array("value"=>"eladas:eladas;bérbe adás:bérbe adás");
         $cod["editoptions"]["onchange"] = "function(){ show_hide_fields(); }";
         $cods[] = $cod;
 
@@ -517,6 +517,13 @@ class InvoiceController extends Controller
 
 
         return view('new_order', array('clients_output' => $out_clients, 'invoices_output' => $out_detail, 'invoice_rows_output' => $out_detail2));
+    }
+
+    public function getInvoice($id){
+        $invoice = InvoiceProduct::where('invoice_id','=',$id)->first();
+        $invoiceProducts = InvoiceProduct::where('invoice_id','=',$id)->paginate(5);
+
+        return view('invoice', ['invoiceProducts'=>$invoiceProducts],['invoice'=>$invoice]);
     }
 
 }
