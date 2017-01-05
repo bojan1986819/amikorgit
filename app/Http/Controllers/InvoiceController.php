@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Dompdf\FrameDecorator\Table;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Invoice;
@@ -291,14 +292,26 @@ class InvoiceController extends Controller
         $cols[] = $col;
 
         $col = array();
-        $col["title"] = "Sorok megtekintése";
+        $col["title"] = "Sorok<br>megtekintése";
         $col["name"] = "detail";
         $col["default"] = "<a class='fancybox' onclick='jQuery(\"#list2\").setSelection({id});' href='#box_detail_grid2'>Sorok</a>";
-        $col["width"] = "220";
+        $col["width"] = "120";
         $col["align"] = "center";
         $col["editable"] = false;
         $col["search"] = false;
         $col["export"] = false;
+        $cols[] = $col;
+
+        $col = array();
+        $col["title"] = "Számla<br>Nyomtatása";
+        $col["name"] = "print";
+        $buttons_html = "<a target='_blank' href='invoice/{id}' >Nyomtatás</a>";
+        $col["width"] = "140";
+        $col["align"] = "center";
+        $col["editable"] = false;
+        $col["search"] = false;
+        $col["export"] = false;
+        $col["default"] = $buttons_html;
         $cols[] = $col;
 
 
@@ -470,7 +483,7 @@ class InvoiceController extends Controller
             $berbstart = InvoiceProduct::where('product_name',$data["params"]["product_name"])->min('berbeadas_start');
             $eladasdat = InvoiceProduct::where('product_name',$data["params"]["product_name"])->min('eladas_date');
 
-            if($data["params"]["type"]!='eladás') {
+            if($data["params"]["type"]!='eladas') {
                 if ($berbend > $data["params"]["berbeadas_start"] && $berbstart < $data["params"]["berbeadas_start"])
                     phpgrid_error("Ez alatt az idő alatt már bérbe van adva");
                 elseif ($berbend > $data["params"]["berbeadas_end"] && $berbstart < $data["params"]["berbeadas_end"])
@@ -520,10 +533,24 @@ class InvoiceController extends Controller
     }
 
     public function getInvoice($id){
-        $invoice = InvoiceProduct::where('invoice_id','=',$id)->first();
-        $invoiceProducts = InvoiceProduct::where('invoice_id','=',$id)->paginate(5);
+//        $invoice = InvoiceProduct::where('invoice_id','=',$id)->first();
+        $invoice = Invoice::
+            leftJoin('clients', 'invoices.client_id', '=', 'clients.id')
+            ->where('invoices.id','=',$id)
+            ->select('invoices.*','client_name','company_name','address','postal_code','city','email')
+            ->first();
+        $invoiceProducts = InvoiceProduct::
+            join('products','invoice_products.product_id', '=', 'products.id')
+            ->where('invoice_products.invoice_id','=',$id)
+            ->select('invoice_products.*','product_name')
+            ->paginate(5);
+        $ipsum = InvoiceProduct::
+            groupBy('invoice_id')
+            ->selectRaw('sum(price) as price, invoice_id')
+            ->where('invoice_id','=',$id)
+            ->first();
 
-        return view('invoice', ['invoiceProducts'=>$invoiceProducts],['invoice'=>$invoice]);
+        return view('invoice', ['ipsums'=>$ipsum,'invoiceProducts'=>$invoiceProducts,'invoices'=>$invoice]);
     }
 
 }
