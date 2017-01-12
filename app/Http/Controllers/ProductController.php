@@ -22,16 +22,17 @@ class ProductController extends Controller
 
     public function newProduct(){
 
-        include(app_path() . '\Classes\phpgrid\jqgrid_dist.php');
+        include(app_path() . '/Classes/phpgrid/jqgrid_dist.php');
 
         // Database config file to be passed in phpgrid constructor
-        $db_conf = array(
-            "type" => 'mysqli',
-            "server" => 'localhost',
-            "user" => 'admin',
-            "password" => 'admin',
-            "database" => 'laravel'
-        );
+//        $db_conf = array(
+//            "type" => 'mysqli',
+//            "server" => 'localhost',
+//            "user" => 'admin',
+//            "password" => 'admin',
+//            "database" => 'laravel'
+//        );
+        include ('connect.php');
 
         $g = new \jqgrid($db_conf);
         $opt["toolbar"] = "top";
@@ -388,8 +389,6 @@ class ProductController extends Controller
         return view('new_product', array('phpgrid_output_detail' => $out_detail, 'phpgrid_output_master' => $out_master));
     }
 
-
-
     public function productIndex(){
         return view('products');
     }
@@ -403,16 +402,18 @@ class ProductController extends Controller
 
 
     public function allProductList(){
-        include(app_path() . '\Classes\phpgrid\jqgrid_dist.php');
+        include(app_path() . '/Classes/phpgrid/jqgrid_dist.php');
 
         // Database config file to be passed in phpgrid constructor
-        $db_conf = array(
-            "type" => 'mysqli',
-            "server" => 'localhost',
-            "user" => 'admin',
-            "password" => 'admin',
-            "database" => 'laravel'
-        );
+//        $db_conf = array(
+//            "type" => 'mysqli',
+//            "server" => 'localhost',
+//            "user" => 'admin',
+//            "password" => 'admin',
+//            "database" => 'laravel'
+//        );
+
+        include ('connect.php');
 
         $g = new \jqgrid($db_conf);
         $opt["toolbar"] = "top";
@@ -476,6 +477,20 @@ class ProductController extends Controller
         $coe["editable"] = true;
         $coes[] = $coe;
 
+        $coe = array();
+        $coe["title"] = "Termék<br>adatai";
+        $coe["name"] = "logo";
+        $coe["width"] = "100";
+        $coe["align"] = "left";
+        $coe["search"] = false;
+        $coe["sortable"] = false;
+        $coe["export"] = true;
+        $buttons_html = "<a target='_blank' href='products/{id}' class='btn btn-primary'>Adatok</a>";
+        $coe["default"] = $buttons_html;
+//        $newid = "{!! URL::to('project/{id}'); !!}";
+//        $col["default"] = QrCode::size(80)->generate($newid);
+        $coes[] = $coe;
+
         $g->set_columns($coes);
 
 
@@ -493,9 +508,6 @@ class ProductController extends Controller
         $out = $g->render("list1");
         return view('all_products', array('all_products_output' => $out));
     }
-
-
-
 
 
     public function nameAutocomplete(){

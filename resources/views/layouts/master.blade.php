@@ -31,12 +31,12 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="//cdn.jsdelivr.net/tag-it/2.0/css/jquery.tagit.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/tag-it/2.0/js/tag-it.min.js"></script>
+    <link href="{{ URL::to('src/css/jquery.tagit.css') }}" rel="stylesheet">
+    <script src="{{ URL::to('src/js/tag-it.min.js') }}"></script>
 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/select2/3.5.2/select2.css">
-    <script src="//cdn.jsdelivr.net/select2/3.5.2/select2.min.js"></script>
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <link rel="stylesheet" href="{{ URL::to('src/css/select2.css') }}">
+    <script src="{{ URL::to('src/js/select2.min.js') }}"></script>
+    <script src="{{ URL::to('src/js/tinymce/tinymce.min.js') }}"></script>
 
 </head>
 <body>
@@ -53,6 +53,11 @@
         <div class="container-fluid">
 
             <br>
+            <style>
+                .ui-datepicker .ui-datepicker-title select {
+                    color: #000;
+                }
+            </style>
                 @yield('content')
 
         </div>

@@ -19,18 +19,22 @@ class MailController extends Controller
         $this->validate($request, [
             'email' => 'required|email',
             'subject' => 'min:3',
+            'emailname' => 'min:3',
             'message' => 'min:1']);
 
         $clients = Client::where('email','<>','')->groupBy('email')->pluck('email');
-        $data = array(
-            'email' => $request->email,
-            'subject' => $request->subject,
-            'bodyMessage' => $request->message
-        );
+
 
         foreach ($clients as $client) {
+            $data = array(
+                'email' => $request->email,
+                'emailname' => $request->emailname,
+                'subject' => $request->subject,
+                'bodyMessage' => $request->message,
+                'clientemail' => $client
+            );
             Mail::send(['html'=>'email.email'], $data, function ($message) use ($data, $client) {
-                $message->from($data['email']);
+                $message->from($data['email'], $data['emailname']);
                 $message->to($client)
                     ->getSwiftMessage()
                     ->getHeaders()

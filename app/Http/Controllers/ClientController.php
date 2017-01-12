@@ -29,16 +29,17 @@ class ClientController extends Controller
     {
         if (Auth::check()) {
 
-            include(app_path() . '\Classes\phpgrid\jqgrid_dist.php');
+            include(app_path() . '/Classes/phpgrid/jqgrid_dist.php');
 
             // Database config file to be passed in phpgrid constructor
-            $db_conf = array(
-                "type" => 'mysqli',
-                "server" => 'localhost',
-                "user" => 'admin',
-                "password" => 'admin',
-                "database" => 'laravel'
-            );
+//            $db_conf = array(
+//                "type" => 'mysqli',
+//                "server" => 'localhost',
+//                "user" => 'admin',
+//                "password" => 'admin',
+//                "database" => 'laravel'
+//            );
+            include ('connect.php');
 
             $g = new \jqgrid($db_conf);
 

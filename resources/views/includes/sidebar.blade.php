@@ -2,7 +2,7 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="#">
+            <a href="{{ route('mainpage') }}">
                 Főoldal
             </a>
         </li>
@@ -22,7 +22,7 @@
             <a href="{{ route('email') }}">Promóciók</a>
         </li>
         <li>
-            <a href="#">Teendők kezelése</a>
+            <a href="{{ route('tasks') }}">Teendők kezelése</a>
         </li>
         @if(Auth::user() -> isAdmin())
         <li>

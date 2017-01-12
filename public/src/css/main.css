@@ -80,6 +80,10 @@
     background-color: #ffffff;
 }
 
+.ui-datepicker .ui-datepicker-title select {
+    color: #000;
+}
+
 
 
 

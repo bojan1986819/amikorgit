@@ -13,8 +13,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('account') }}">Account</a></li>
-                <li><a href="{{ route('logout') }}">Logout</a></li>
+                <li><a href="{{ route('account') }}">Saját fiók</a></li>
+                <li><a href="{{ route('logout') }}">Kilépés</a></li>
             </ul>
         </div>
     </div>

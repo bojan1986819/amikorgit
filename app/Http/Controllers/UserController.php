@@ -47,7 +47,7 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-            return redirect()->route('users');
+            return redirect()->route('mainpage');
         }
         return redirect()->route('home');
     }
@@ -112,7 +112,7 @@ class UserController extends Controller
         $user = User::where('id', $user_id)->first();
         if (Auth::user() -> isAdmin()) {
             $user->delete();
-            return redirect()->route('users')->with(['message' => 'Successfully deleted!']);
+            return redirect()->route('users')->with(['message' => 'Sikeresen törölve!']);
         }
         return redirect()->back();
     }

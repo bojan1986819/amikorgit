@@ -16,8 +16,10 @@ $('.userlist').find('.interaction').find('a').eq(0).on('click', function () {
 });
 
 
-$('.userlist').find('.buttonrow').find('.btn').on('click', function (event) {
-    event.preventDefault();
+$('.userlist').find('.buttonrow').find('#editbtn').on('click', function (event) {
+// $('.userrows').find('#editbtn').find('.btn').on('click', function (event) {
+
+        event.preventDefault();
 
     userLastNameElement = event.target.parentNode.parentNode.parentNode.childNodes[1].childNodes[0];
     userFirstNameElement = event.target.parentNode.parentNode.parentNode.childNodes[1].childNodes[1];
@@ -152,3 +154,4 @@ $('.modal-footer').on('click', '.delete', function() {
         }
     });
 });
+

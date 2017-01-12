@@ -45,9 +45,10 @@
 
     </div>
 
-    <div id='box_detail_grid' style='display:none'>
+    {{--<div id='box_detail_grid' style='display:none'>--}}
+{{--        {!! $invoices_output !!}--}}
 
-    </div>
+    {{--</div>--}}
 
     <div id='box_detail_grid2' style='display:none'>
         {!! $invoice_rows_output !!}
@@ -78,7 +79,7 @@
 
         $(document).ready(function() {
             $('.fancybox').fancybox({
-//                afterClose : function() { $('#list1').trigger("reloadGrid"); }
+                afterClose : function() { $('#list2').trigger("reloadGrid");}
             });
 
         });
@@ -91,7 +92,6 @@
     </script>
 
 </div>
-<hr>
 @endsection
 
 

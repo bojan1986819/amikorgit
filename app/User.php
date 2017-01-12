@@ -18,6 +18,11 @@ class User extends Model implements Authenticatable
         return $this->hasMany('App\Product');
     }
 
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
+
     public function isAdmin()
     {
         return $this->admin; // this looks for an admin column in your users table

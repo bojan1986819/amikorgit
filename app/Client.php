@@ -17,4 +17,9 @@ class Client extends Model
     {
         return $this->hasMany('App\Invoice');
     }
+
+    public function task()
+    {
+        return $this->hasMany('App\Task');
+    }
 }

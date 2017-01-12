@@ -1,7 +1,8 @@
 <h3>Teszt üzenet teteje</h3>
 
 <div>
-    {{ $bodyMessage }}
+    {!! $bodyMessage !!}
+
 </div>
 
-<p>Elküldve neki: {{ $email }}</p>
+<p>Elküldve neki: {{ $clientemail }}</p>

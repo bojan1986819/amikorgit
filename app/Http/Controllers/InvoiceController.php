@@ -12,16 +12,18 @@ class InvoiceController extends Controller
 {
     public function newOrder()
     {
-        include(app_path() . '\Classes\phpgrid\jqgrid_dist.php');
+        include(app_path() . '/Classes/phpgrid/jqgrid_dist.php');
 
         // Database config file to be passed in phpgrid constructor
-        $db_conf = array(
-            "type" => 'mysqli',
-            "server" => 'localhost',
-            "user" => 'admin',
-            "password" => 'admin',
-            "database" => 'laravel'
-        );
+//        $db_conf = array(
+//            "type" => 'mysqli',
+//            "server" => 'localhost',
+//            "user" => 'admin',
+//            "password" => 'admin',
+//            "database" => 'laravel'
+//        );
+
+        include ('connect.php');
 
         $g = new \jqgrid($db_conf);
 
@@ -167,6 +169,17 @@ class InvoiceController extends Controller
         $coe["editable"] = false;
         $coe["show"] = array("list"=>true, "add"=>false, "edit"=>false, "view"=>true, "bulkedit"=>false);
         $coes[] = $coe;
+
+//        $coe = array();
+//        $coe["title"] = "Számlák<br>megtekintése";
+//        $coe["name"] = "invoices";
+//        $coe["default"] = "<a class='fancybox' onclick='jQuery(\"#list1\").setSelection({id});' href='#box_detail_grid'>Számlák</a>";
+//        $coe["width"] = "120";
+//        $coe["align"] = "center";
+//        $coe["editable"] = false;
+//        $coe["search"] = false;
+//        $coe["export"] = false;
+//        $coes[] = $coe;
 
         $e["on_data_display"] = array(function($data){
             foreach($data["params"] as &$d)
@@ -479,9 +492,9 @@ class InvoiceController extends Controller
             $id = intval($_GET["rowid"]);
             $nowdate = date('y/m/d');
 
-            $berbend = InvoiceProduct::where('product_name',$data["params"]["product_name"])->max('berbeadas_end');
-            $berbstart = InvoiceProduct::where('product_name',$data["params"]["product_name"])->min('berbeadas_start');
-            $eladasdat = InvoiceProduct::where('product_name',$data["params"]["product_name"])->min('eladas_date');
+            $berbend = InvoiceProduct::where('product_id',$data["params"]["product_id"])->max('berbeadas_end');
+            $berbstart = InvoiceProduct::where('product_id',$data["params"]["product_id"])->min('berbeadas_start');
+            $eladasdat = InvoiceProduct::where('product_id',$data["params"]["product_id"])->min('eladas_date');
 
             if($data["params"]["type"]!='eladas') {
                 if ($berbend > $data["params"]["berbeadas_start"] && $berbstart < $data["params"]["berbeadas_start"])
@@ -500,8 +513,8 @@ class InvoiceController extends Controller
             } else {
                 if ($berbend > $data["params"]["eladas_date"])
                     phpgrid_error("Ez alatt az idő alatt már bérbe van adva");
-                elseif ($eladasdat > $data["params"]["eladas_date"])
-                    phpgrid_error("Ez alatt az idő alatt már el van adva");
+                elseif ($eladasdat != null)
+                    phpgrid_error("Ez a termék már el van adva");
                 $data["params"]["invoice_id"] = $id;
                 $data["params"]["created_at"] = $nowdate;
                 $data["params"]["berbeadas_end"] = 'NULL';
@@ -509,7 +522,7 @@ class InvoiceController extends Controller
             }
         }, null, true);
         $e["on_update"] = array(function($data){
-            if($data["params"]["type"]!='eladás') {
+            if($data["params"]["type"]!='eladas') {
                 $data["params"]["eladas_date"]= 'NULL';
             } else {
                 $data["params"]["berbeadas_end"] = 'NULL';

@@ -153,5 +153,28 @@ Route::any('/balance', [
     'middleware' => 'auth'
 ]);
 
+Route::get('/tasks', [
+    'uses' => 'TaskController@getTaskList',
+    'as' => 'tasks',
+    'middleware' => 'auth'
+]);
+
+Route::post('/addtask', [
+    'uses' => 'TaskController@postAddTask',
+    'as' => 'addtask',
+    'middleware' => 'auth'
+]);
+
+Route::get('/delete-task/{id}', [
+    'uses' => 'TaskController@getDeleteTask',
+    'as' => 'task.delete',
+    'middleware' => 'admin'
+]);
+
+Route::get('/mainpage', [
+    'uses' => 'MainPageController@getUserMain',
+    'as' => 'mainpage'
+]);
+
 
 

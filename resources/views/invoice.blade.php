@@ -104,7 +104,7 @@
                                 </td>
 
                                 <td>
-                                    Számlaszám: {{ $invoices->id }}<br>
+                                    Számlaszám: {{ $invoices->invoice_no }}<br>
                                     Kiállítva: {{ $invoices->invoice_date }}<br>
                                     Esedékes: {{ $invoices->due_date }}
                                 </td>

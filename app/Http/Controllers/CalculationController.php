@@ -8,16 +8,17 @@ class CalculationController extends Controller
 {
     public function allIncome()
     {
-        include(app_path() . '\Classes\phpgrid\jqgrid_dist.php');
+        include(app_path() . '/Classes/phpgrid/jqgrid_dist.php');
 
         // Database config file to be passed in phpgrid constructor
-        $db_conf = array(
-            "type" => 'mysqli',
-            "server" => 'localhost',
-            "user" => 'admin',
-            "password" => 'admin',
-            "database" => 'laravel'
-        );
+//        $db_conf = array(
+//            "type" => 'mysqli',
+//            "server" => 'localhost',
+//            "user" => 'admin',
+//            "password" => 'admin',
+//            "database" => 'laravel'
+//        );
+        include ('connect.php');
 
         $g = new \jqgrid($db_conf);
         $opt["toolbar"] = "top";
@@ -30,7 +31,7 @@ class CalculationController extends Controller
         $opt["export"]["range"] = "filtered";
 
         $g->set_options($opt);
-        $g->select_command = "SELECT clients.id, clients.client_name, Sum(products.beszerzesi_ar) AS 'sumspends', Sum(invoice_products.price) AS 'sumincome' FROM ((invoice_products INNER JOIN invoices ON invoice_products.invoice_id = invoices.id) RIGHT JOIN clients ON invoices.client_id = clients.id) LEFT JOIN products ON clients.id = products.client_id GROUP BY clients.id";
+        $g->select_command = "SELECT clients.id, clients.client_name, Sum(products.beszerzesi_ar) AS 'sumspends', Sum(invoice_products.price) AS 'sumincome', invoice_products.created_at as 'createdat' FROM ((invoice_products INNER JOIN invoices ON invoice_products.invoice_id = invoices.id) RIGHT JOIN clients ON invoices.client_id = clients.id) LEFT JOIN products ON clients.id = products.client_id GROUP BY clients.id HAVING sumspends > 1 or sumincome > 1";
         $g->table = "clients";
 
         $col = array();
