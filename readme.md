@@ -1,4 +1,4 @@
-# HP app for running an art galery, done in Larevel
+# PHP app for running an art galery, done in Larevel
 
 Web App I'm currently working on in coperation with an Art Galery.
 
