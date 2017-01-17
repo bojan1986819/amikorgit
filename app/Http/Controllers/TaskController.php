@@ -18,7 +18,7 @@ class TaskController extends Controller
             ->orderBy('tasks.created_at', 'desc')
             ->paginate(5);
 
-        $users = User::orderBy('first_name');
+        $users = User::orderBy('first_name')->get();
         return view('tasks', ['tasks' => $tasks, 'users' => $users]);
     }
 

@@ -13,12 +13,12 @@
 
 
 Route::get('/', function () {
-    if(Auth::check()){return Redirect::to('users');}
+    if(Auth::check()){return Redirect::to('mainpage');}
     return view('welcome');
 })->name('home');
 
 Route::get('/users', function () {
-    if(Auth::check()){return Redirect::to('users');}
+    if(Auth::check()){return Redirect::to('mainpage');}
     return view('welcome');
 });
 
@@ -148,7 +148,7 @@ Route::get('email', ['uses' => 'MailController@getEmailForm', 'as' => 'email', '
 Route::post('postemail', ['uses' => 'MailController@postEmail','as' => 'postemail', 'middleware' => 'auth']);
 
 Route::any('/balance', [
-    'uses' => 'CalculationController@allIncome',
+    'uses' => 'CalculationController@balance',
     'as' => 'balance',
     'middleware' => 'auth'
 ]);
@@ -174,6 +174,24 @@ Route::get('/delete-task/{id}', [
 Route::get('/mainpage', [
     'uses' => 'MainPageController@getUserMain',
     'as' => 'mainpage'
+]);
+
+Route::any('/income', [
+    'uses' => 'CalculationController@allIncome',
+    'as' => 'income',
+    'middleware' => 'auth'
+]);
+
+Route::any('/biznotpaid', [
+    'uses' => 'CalculationController@bizSoldNotPayed',
+    'as' => 'biznotpaid',
+    'middleware' => 'auth'
+]);
+
+Route::any('/expense', [
+    'uses' => 'ExpenseController@allExpenses',
+    'as' => 'expense',
+    'middleware' => 'auth'
 ]);
 
 

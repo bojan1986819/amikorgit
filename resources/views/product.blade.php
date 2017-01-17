@@ -58,7 +58,7 @@
                                     <td width="100px">
                                         @if(Auth::user())
                                             <div id="printableArea" align="center">
-                                                {!! QrCode::size(100)->generate(URL::to("project/{$product->id}"));  !!}
+                                                {!! QrCode::size(100)->generate(URL::to("products/{$product->id}"));  !!}
                                             </div>
                                     </td>
                                     <td align="left">

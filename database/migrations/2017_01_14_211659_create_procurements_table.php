@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Likes extends Migration
+class CreateProcurementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class Likes extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('procurements', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('user_id');
-            $table->integer('post_id');
-            $table->boolean('like');
+            $table->string('szerzodesszam');
+            $table->integer('client_id');
+            $table->date('creation_date');
+            $table->date('due_date');
+            $table->string('type');
         });
     }
 
@@ -29,6 +31,6 @@ class Likes extends Migration
      */
     public function down()
     {
-        Schema::drop('likes');
+        Schema::dropIfExists('procurements');
     }
 }

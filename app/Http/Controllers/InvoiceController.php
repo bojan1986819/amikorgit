@@ -14,14 +14,6 @@ class InvoiceController extends Controller
     {
         include(app_path() . '/Classes/phpgrid/jqgrid_dist.php');
 
-        // Database config file to be passed in phpgrid constructor
-//        $db_conf = array(
-//            "type" => 'mysqli',
-//            "server" => 'localhost',
-//            "user" => 'admin',
-//            "password" => 'admin',
-//            "database" => 'laravel'
-//        );
 
         include ('connect.php');
 
@@ -65,7 +57,9 @@ class InvoiceController extends Controller
                      insert_form_section(form, "postal_code", "Cím"); 
          
                 }';
-
+        $opt["add_options"]["success_msg"] = "Kliens sikeresen létrehozva!";
+        $opt["edit_options"]["success_msg"] = "Kliens sikeresen módosítva!";
+        $opt["delete_options"]["success_msg"] = "Kliens sikeresen törölve!";
         $g->set_options($opt);
         $g->select_command = "SELECT * FROM clients WHERE type like '%vevő%'";
         $g->table = "clients";
@@ -100,8 +94,8 @@ class InvoiceController extends Controller
         $coe = array();
         $coe["title"] = "Típus";
         $coe["name"] = "type";
-        $coe["editable"] = true;
-        $coe["editrules"] = array("required"=>true);
+        $coe["editable"] = false;
+//        $coe["editrules"] = array("required"=>true);
         $coe["edittype"] = "select";
         $coe["editoptions"] = array("value"=>"beszállító:beszállító;vevő:vevő;restaurátor:restaurátor;bizományos:bizományos");
         $coes[] = $coe;
@@ -180,6 +174,10 @@ class InvoiceController extends Controller
 //        $coe["search"] = false;
 //        $coe["export"] = false;
 //        $coes[] = $coe;
+
+        $e["on_insert"] = array(function($data){
+            $data["params"]["type"] = "vevő";
+        }, null, true);
 
         $e["on_data_display"] = array(function($data){
             foreach($data["params"] as &$d)
@@ -410,10 +408,10 @@ class InvoiceController extends Controller
         $cod["editable"] = true;
         $cod["editrules"] = array("required"=>true);
         $cod["edittype"] = "select"; // render as select
-        $str = $g->get_dropdown_values("select distinct id as k, product_name as v from products where eladas_status != 'restaurálás' or eladas_status is null");
+        $str = $g->get_dropdown_values("select distinct id as k, concat(id,', ', product_name) as v from products where eladas_status != 'restaurálás' or eladas_status is null");
         $cod["editoptions"] = array("value"=>":;".$str);
         $cod["editoptions"]["dataInit"] = "function(){ setTimeout(function(){ link_select2('{$cod["name"]}'); },200); }";
-        $cod["stype"] = "select"; // render as select
+//        $cod["stype"] = "select"; // render as select
         $cod["searchoptions"] = array("value"=>$str);
         $cod["searchoptions"]["dataInit"] = "function(){ setTimeout(function(){ link_select2('gs_{$cod["name"]}'); },200); }";
         $cods[] = $cod;

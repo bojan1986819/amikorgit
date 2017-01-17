@@ -45,17 +45,11 @@
 
     </div>
 
-    {{--<div id='box_detail_grid' style='display:none'>--}}
-{{--        {!! $invoices_output !!}--}}
-
-    {{--</div>--}}
 
     <div id='box_detail_grid2' style='display:none'>
         {!! $invoice_rows_output !!}
 
     </div>
-
-    {{--<iframe src="sima/main.php" width="1300" height="1000"></iframe>--}}
 
     <script>
         function show_hide_fields()

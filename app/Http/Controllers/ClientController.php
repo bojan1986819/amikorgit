@@ -31,14 +31,6 @@ class ClientController extends Controller
 
             include(app_path() . '/Classes/phpgrid/jqgrid_dist.php');
 
-            // Database config file to be passed in phpgrid constructor
-//            $db_conf = array(
-//                "type" => 'mysqli',
-//                "server" => 'localhost',
-//                "user" => 'admin',
-//                "password" => 'admin',
-//                "database" => 'laravel'
-//            );
             include ('connect.php');
 
             $g = new \jqgrid($db_conf);
@@ -107,13 +99,14 @@ class ClientController extends Controller
             $col["title"] = "Érdeklődési kör";
             $col["name"] = "interest";
             $col["editable"] = true;
+            $col["stype"] = "text";
             $col["editoptions"] = array("size"=>20); // with default display of textbox with size 20
             $col["editoptions"]["dataInit"] = 'function(el){ setTimeout(function(){          
                                                                                 // remove nbsp from start 
                                                                                 if (jQuery(".FormGrid:visible").length) $(el)[0].parentNode.firstChild.remove(); 
                                                                                          
                                                                                 $("input[name=interest]").tagit({ 
-                                                                                            availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"] 
+                                                                                            availableTags: ["judaika", "festészet", "szobrászat", "könyv", "újság", "20-as évek", "Picasso"] 
                                                                                         }); },200); }';
             $cols[] = $col;
 

@@ -12,12 +12,13 @@
 
     <!-- Custom CSS -->
     <link href="{{ URL::to('src/css/simple-sidebar.css')}}" rel="stylesheet">
-    <link href="{{ URL::to('src/css/main.css')}}" rel="stylesheet">
 
 
     <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::to('src/js/phpgrid/themes/blitzer/jquery-ui.custom.css')}}">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::to('src/js/phpgrid/jqgrid/css/ui.jqgrid.css')}}">
-    <script src="{{ URL::to('src/js/phpgrid/jquery.min.js')}}"></script>
+{{--    <script src="{{ URL::to('src/js/phpgrid/jquery.min.js')}}"></script>--}}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
     {{--<script type="text/javascript" src="{{ URL::to('src/js/jquery.touchSwipe.min.js')}}"></script>--}}
 {{--    <script src="{{ URL::to('src/js/phpgrid/jqgrid/js/i18n/grid.locale-en.js')}}" type="text/javascript"></script>--}}
     <script src="{{ URL::to('src/js/phpgrid/jqgrid/js/i18n/grid.locale-hu.js')}}" type="text/javascript"></script>
@@ -37,6 +38,8 @@
     <link rel="stylesheet" href="{{ URL::to('src/css/select2.css') }}">
     <script src="{{ URL::to('src/js/select2.min.js') }}"></script>
     <script src="{{ URL::to('src/js/tinymce/tinymce.min.js') }}"></script>
+    <link href="{{ URL::to('src/css/main.css')}}" rel="stylesheet">
+
 
 </head>
 <body>
@@ -56,6 +59,12 @@
             <style>
                 .ui-datepicker .ui-datepicker-title select {
                     color: #000;
+                }
+
+                .ui-jqgrid tr.jqgrow td
+                {
+                    vertical-align: top;
+                    white-space: normal;
                 }
             </style>
                 @yield('content')

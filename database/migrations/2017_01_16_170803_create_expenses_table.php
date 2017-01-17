@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Posts extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class Posts extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->text('body');
-            $table->integer('user_id');
+            $table->string('description');
+            $table->integer('price');
+            $table->string('type');
+            $table->string('other');
+            $table->boolean('paid');
         });
     }
 
@@ -28,6 +31,6 @@ class Posts extends Migration
      */
     public function down()
     {
-        Schema::drop('posts');
+        Schema::dropIfExists('expenses');
     }
 }
